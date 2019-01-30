@@ -34,6 +34,8 @@ class VendingMachine():
 
     def select_item(self):
         selected_id = int(input("商品を選択して: "))
+        if self.ITEMS_LIST[selected_id]["stock"] == 0:
+            return -1
         if selected_id is -1:
             return -1
         return self.ITEMS_LIST[selected_id]
@@ -63,6 +65,7 @@ class VendingMachine():
         for item in self.ITEMS_LIST:
             if new_item["name"] == item["name"]:
                 print("おなじやつあるぞ")
+                return -1
         self.ITEMS_LIST.append(new_item)
 
     def save_items_list(self):
