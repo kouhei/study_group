@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>VM</title>
 </head>
 <body>
-    <p>Hi</p>
+    {% if message: %}
+        <p>{{message}}</p>
+    {% endif %}
+    {% if money: %}
+        <p>{{money}}円あります</p>
+    {% endif %}
+    <h3>商品リスト</h3>
+    <table>
+        {% for item in items%}
+            <tr><td>{{item.name}}</td> <td>{{item.price}}</td>
+            {% if item.stock == 0 %}
+                <td>売り切れ</td>
+            {% else %}
+                <td>販売中</td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <p>お金を入れてください</p>
+    <form action="/select_item", method="get">
+        <input name="money" type="radio" value="10" required>10<br>
+        <input name="money" type="radio" value="50" required>50<br>
+        <input name="money" type="radio" value="100"required>100<br>
+        <input name="money" type="radio" value="500"required>500<br>
+        <input name="money" type="radio" value="1000"required>1000<br>
+        <input type="submit" value="投入">
+    </form>
 </body>
 </html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>VM</title>
+</head>
+<body>
+    {% if message: %}
+        <p>{{message}}</p>
+    {% endif %}
+    <p>{{money}}円あります</p>
+    <br>
+    <p>商品を選んでください</p>
+    <h3>商品リスト</h3>
+    <form action="/buy", method="get">
+        {% for item in items %}
+            {% if item.stock == 0 %}
+                <p>{{item.name}}, {{item.price}}, 売り切れ</p>
+            {% else %}
+            <input type="radio" name="selected_item_id", value="{{loop.index0}}" required>{{item.name}}, {{item.price}}, 販売中
+            {% endif %}
+            <br>
+        {% endfor %}
+        <input type="submit" value="購入">
+        <br>
+    </form>
+    <a href="/?money={{money}}">お金を入れる</a>
+</body>
+</html>
